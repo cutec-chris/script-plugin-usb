@@ -53,6 +53,7 @@
       <Unit2>
         <Filename Value="udeleteusb.pas"/>
         <IsPartOfProject Value="True"/>
+        <UnitName Value="uDeleteUSB"/>
       </Unit2>
     </Units>
   </ProjectOptions>
