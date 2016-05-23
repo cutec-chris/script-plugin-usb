@@ -3,7 +3,7 @@ library usb;
 {$mode objfpc}{$H+}
 
 uses
-  Classes,sysutils,setupapi,general_nogui,uDeleteUSB
+  Classes,sysutils,setupapi,uDeleteUSB
   {$IFDEF WINDOWS}
   ,Windows
   {$ENDIF}
@@ -25,7 +25,6 @@ end;
 function ScriptDefinition : PChar;stdcall;
 begin
   Result := 'function ListUSBDevices : PChar;stdcall;'
-       +#10+'function SetInput(aName : PChar) : Boolean;stdcall;'
        +#10+'function DeleteComPort(aPort : PChar) : Boolean;stdcall;'
        ;
 end;
@@ -36,8 +35,9 @@ begin
 end;
 
 exports
+  DeleteComPort,
+  ListUSBDevices,
   ScriptDefinition,
-  ScriptCleanup,
-  ListUSBDevices;
+  ScriptCleanup;
 
 end.

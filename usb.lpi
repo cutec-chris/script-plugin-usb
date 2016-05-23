@@ -33,13 +33,10 @@
         <CommandLineParams Value="&quot;--config-path=devel&quot; Test.Usb"/>
       </local>
     </RunParams>
-    <RequiredPackages Count="2">
+    <RequiredPackages Count="1">
       <Item1>
-        <PackageName Value="general_nogui"/>
-      </Item1>
-      <Item2>
         <PackageName Value="FCL"/>
-      </Item2>
+      </Item1>
     </RequiredPackages>
     <Units Count="3">
       <Unit0>
