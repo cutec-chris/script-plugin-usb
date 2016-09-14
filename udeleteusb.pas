@@ -5,7 +5,7 @@ unit uDeleteUSB;
 interface
 
 uses
-  Classes, SysUtils, SetupAPI, Windows, JwaWinUser, uMSCOMDB;
+  Classes, SysUtils, SetupAPI, Windows, JwaWinUser, uMSCOMDB, registry;
 
 function DeleteDevice(GUID : TGUID;Port : string) : Boolean;
 
@@ -44,6 +44,10 @@ var
   aBytesReturned: Integer;
   ChildInst : DWORD;
   ComDB : LongWord;
+  Bindata : array[0..$20] of byte;
+  Reg : TRegistry;
+  TheKey : string;
+  i : Integer;
 begin
   Result := False;
   PnPHandle := SetupDiGetClassDevsA(@Guid, nil, 0,DIGCF_PRESENT or DIGCF_DEVICEINTERFACE);
@@ -93,6 +97,18 @@ begin
       end;
   until not Success;
   SetupDiDestroyDeviceInfoList(PnPHandle);
+  Reg := TRegistry.Create;
+  Reg.RootKey := HKEY_LOCAL_MACHINE;
+  TheKey := 'SYSTEM\CurrentControlSet\Control\COM Name Arbiter';
+  if Reg.OpenKey(TheKey, False) then
+    begin
+      Reg.ReadBinaryData('ComDB',Bindata[0],$20);
+      for i := 7 to $20 do
+        BinData[i] := 0;
+      Reg.WriteBinaryData('ComDB',Bindata[0],$20);
+    end;
+  Reg.CloseKey;
+  Reg.Free;
 end;
 
 end.
