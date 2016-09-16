@@ -25,7 +25,6 @@ end;
 function ScriptDefinition : PChar;stdcall;
 begin
   Result := 'function ListUSBDevices : PChar;stdcall;'
-       +#10+'function SetInput(aName : PChar) : Boolean;stdcall;'
        +#10+'function DeleteComPort(aPort : PChar) : Boolean;stdcall;'
        ;
 end;
@@ -38,6 +37,7 @@ end;
 exports
   ScriptDefinition,
   ScriptCleanup,
-  ListUSBDevices;
+  ListUSBDevices,
+  DeleteComPort;
 
 end.
